@@ -3,11 +3,11 @@
 // hàm kết nối đến cơ sở dữ liệu
 function connection()
 {
-    $host = "hairsalon-m16e.onrender.com"; // Thay bằng host thật
-    $port = "3306";
+    $host = "dpg-d0rjtmali9vc738m47q0-a"; // Thay bằng host thật
+    $port = "5432";
     $dbname = "cattoc";
-    $username = "root"; // Thay bằng username thật
-    $password = "";   // Thay bằng password thật
+    $username = "cattoc_user"; // Thay bằng username thật
+    $password = "M3XSPqEo531FE63QXBppN06n3GHezKc7";   // Thay bằng password thật
 
     $conn = null;
     if (!$conn) {
