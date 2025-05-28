@@ -1,7 +1,7 @@
 FROM php:8.2-apache
 
 # Cài thêm extension nếu cần
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Copy toàn bộ source code vào thư mục mặc định của Apache
 COPY . /var/www/html/

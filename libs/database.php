@@ -4,6 +4,7 @@
 function connection()
 {
     $host = "hairsalon-m16e.onrender.com"; // Thay bằng host thật
+    $port = "3306";
     $dbname = "cattoc";
     $username = "root"; // Thay bằng username thật
     $password = "";   // Thay bằng password thật
@@ -128,7 +129,7 @@ function insert($table, $data=array()) {
 //$table bảng dữ liệu cần update
 //$id, $value điều kiện update
 //$data dữ liệu cần update
-function update($table,$id,$value_id,$data = array()) {
+function update($table, $id, $value_id, $data = array()) {    
     $conn = connection();
     if (!$conn) {
     die('Không thể kết nối database.');
