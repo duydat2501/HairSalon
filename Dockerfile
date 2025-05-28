@@ -1,13 +1,13 @@
-FROM php:8.1-apache
+FROM php:8.2-apache
 
-# Copy code vào container
+# Copy toàn bộ mã nguồn vào thư mục gốc của Apache
 COPY . /var/www/html/
 
-# Chuyển web root sang thư mục public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+# Cấp quyền truy cập cho Apache
+RUN chown -R www-data:www-data /var/www/html
 
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Bật các module cần thiết nếu dùng
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Bật mod_rewrite (nếu bạn dùng .htaccess)
-RUN a2enmod rewrite
+# Mặc định Apache sẽ chạy trên port 80
+EXPOSE 80
