@@ -131,9 +131,7 @@ function insert($table, $data=array()) {
 //$data dữ liệu cần update
 function update($table, $id, $value_id, $data = array()) {    
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+   
     try {
         $sql = "UPDATE $table SET ";
         foreach ( $data as $key => $value ) {
@@ -157,9 +155,7 @@ function update($table, $id, $value_id, $data = array()) {
 //có điều kiện là $id với giá trị là $value
 function delete($table, $id, $value) {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+   
     try {
         $sql = "DELETE FROM $table WHERE $id=:$id";
         $stmt = $conn->prepare($sql);
@@ -176,9 +172,7 @@ function delete($table, $id, $value) {
 //function
 function list_where_one($table, $codition = array()) {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+   
     try {
         $sql = "Select * from $table WHERE ";
         foreach ($codition as $cod) {
@@ -197,9 +191,7 @@ function list_where_one($table, $codition = array()) {
 //ham dem slg ban ghi trong bang
 function count_row($table){
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+  
     $sql = $conn->prepare("SELECT COUNT(*) FROM $table"); 
         $sql->execute(); 
         $num_row = $sql->fetchColumn();
@@ -210,9 +202,7 @@ function count_row($table){
 function query_where($table, $arr,$limit,$nRows)
 {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+    
     try {
         $sql = "SELECT * FROM $table where $arr[0] $arr[1] :$arr[0] order by id desc limit $limit, $nRows";
         $stmt = $conn->prepare($sql);
