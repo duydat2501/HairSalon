@@ -1,8 +1,9 @@
 services:
   - type: web
-    name: hair-salon
+    name: hairsalon
     env: docker
+    dockerfilePath: ./Dockerfile
     plan: free
-    branch: main
-    region: singapore
-    dockerfilePath: Dockerfile
+    # Nếu bạn dùng startCommand thì phải đúng, nhưng Dockerfile đã có CMD rồi nên có thể bỏ dòng này
+    # startCommand: apache2-foreground
+    autoDeploy: true
