@@ -3,31 +3,27 @@
 // hàm kết nối đến cơ sở dữ liệu
 function connection()
 {
-    $host = "dpg-d0rjtmali9vc738m47q0-a"; // Thay bằng host thật
-    $port = "5432";
-    $dbname = "cattoc";
-    $username = "cattoc_user"; // Thay bằng username thật
-    $password = "M3XSPqEo531FE63QXBppN06n3GHezKc7";   // Thay bằng password thật
-
-    $conn = null;
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
     try {
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+        $host = 'dpg-d0rjtmali9vc738m47q0-a';
+        $port = '5432';
+        $dbname = 'cattoc';
+        $user = 'cattoc_user';
+        $password = 'M3XSPqEo531FE63QXBppN06n3GHezKc7';
+
+        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
-        echo "Lỗi Kết nối: " . $e->getMessage();
+        echo "❌ Lỗi kết nối: " . $e->getMessage();
+        die();
     }
     return $conn;
 }
 
+
 //Hàm lấy toàn bộ dữ liệu của 1 bảng $table
 function listAll($table){
     $conn = connection();
-    if (!$conn) {
-        die('Không thể kết nối database.');
-    }
+    
     try{
         $sql = "SELECT * FROM $table ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
@@ -45,9 +41,7 @@ function listAll($table){
 //$sql lệnh sql select
 function query_exe($sql) {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+   
     try {        
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -62,9 +56,7 @@ function query_exe($sql) {
 
 function query_limit($sql) {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+  
     try {        
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -83,9 +75,7 @@ function query_limit($sql) {
 //$value giá trị của id
 function listOne($table, $id, $value) {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+  
     try {
         $sql = "Select * from $table WHERE $id=:$id";
         $stmt = $conn->prepare($sql);
@@ -105,9 +95,7 @@ function listOne($table, $id, $value) {
 //$data mảng dữ liệu cần thêm
 function insert($table, $data=array()) {
     $conn = connection();
-    if (!$conn) {
-    die('Không thể kết nối database.');
-}
+   
     try {
         $sql = "INSERT INTO $table set ";
 
